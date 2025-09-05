@@ -6,3 +6,7 @@ DB Diagram
 swagger ui
 <img width="1919" height="973" alt="image" src="https://github.com/user-attachments/assets/f61cd8e0-0a79-4830-9033-073436f19a3c" />
 
+ui
+<img width="1919" height="1031" alt="image" src="https://github.com/user-attachments/assets/7d24a659-7353-49ae-8a80-779727a7c54b" />
+
+
