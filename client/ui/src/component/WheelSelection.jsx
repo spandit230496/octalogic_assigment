@@ -5,8 +5,20 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Box, Button } from "@mui/material";
+import { setWheels, setVehicleType, setVehicleModel, setBookingDate,setUser ,setStep} from '../context/bookingSlice';
+import { useSelector, useDispatch } from "react-redux";
 
 export default function WheelSelection({ onSelect }) {
+
+  const currentstep = useSelector((state) => state.booking.currentStep)
+  const wheels=useSelector((state)=>state.booking.wheels)
+  const dispatch = useDispatch();
+
+  const handleSaveNext = () => {
+    dispatch(setWheels(selected))
+    dispatch(setStep(currentstep+1))
+  };
+
   const [selected, setSelected] = React.useState("");
 
   const handleChange = (event) => {
@@ -52,7 +64,8 @@ export default function WheelSelection({ onSelect }) {
 
       <Button
         variant="contained"
-        disabled={!selected}
+        // disabled={!selected}
+        onClick={()=>{handleSaveNext()}}
       >
         Next
       </Button>

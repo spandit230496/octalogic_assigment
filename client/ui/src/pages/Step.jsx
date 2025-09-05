@@ -4,11 +4,13 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { useState } from "react";
-import EnterName from "./EnterName";
-import WheelSelection from "./wheelSelection";
-import TypeOfVehicle from "./TypesOfVehicle";
-import ModelSelection from "./ModelSelection";
-import DateSelection from "./DatePicker";
+import EnterName from "../component/EnterName";
+import WheelSelection from "../component/WheelSelection";
+import TypeOfVehicle from "../component/TypesOfVehicle";
+import ModelSelection from "../component/ModelSelection";
+import DateSelection from "../component/DatePicker";
+import {useDispatch,useSelector} from 'react-redux'
+import { useEffect } from "react";
 
 
 const steps = [
@@ -17,11 +19,22 @@ const steps = [
   "Select Type Of Vehicle",
   "Select Model Of Vehicle",
   "Select Date",
-  "Done",
+  "Book",
 ];
 
+
 export default function Steps() {
-  const [stepCount, setStepCount] = useState(0);
+const currentstep = useSelector((state) => state.booking.currentStep);
+const currentwheel = useSelector((state)=>state.booking.wheel)
+const currenttype = useSelector((state)=>state.booking.type)
+const currentmodel = useSelector((state)=>state.booking.model)
+const [stepCount, setStepCount] = useState(currentstep);
+
+const [typeOfVehicle,setTypeOfVehicle]= useState([])
+const [ModelOfVehicle,setModelOfVehicle]= useState([])
+
+
+useEffect(()=>{setStepCount(currentstep)},[currentstep])
 
   const StepContent = () => {
     switch (stepCount) {
@@ -44,7 +57,7 @@ export default function Steps() {
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={stepCount} alternativeLabel>
         {steps.map((label, index) => (
-          <Step key={label} onClick={() => setStepCount(index)}>
+          <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
