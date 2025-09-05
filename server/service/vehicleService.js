@@ -51,7 +51,7 @@ const getVehicleModel = async (req,res)=>{
 
      if(vehicleModels){
         res.status(200).json({
-            success: false,
+            success: true,
         data: vehicleModels,
         message: "vehicle model found for given type",
         })

@@ -4,7 +4,7 @@ const initialState = {
   currentStep:0,
   user:{},
   wheels: "",
-  vehicleType: "",
+  vehicleType: {},
   vehicleModel: "",
   bookingDate: null,
 };

@@ -8,67 +8,69 @@ import { Box, Button } from "@mui/material";
 import { setWheels, setVehicleType, setVehicleModel, setBookingDate,setUser ,setStep} from '../context/bookingSlice';
 import { useSelector, useDispatch } from "react-redux";
 
-export default function WheelSelection({ onSelect }) {
-
-  const currentstep = useSelector((state) => state.booking.currentStep)
-  const wheels=useSelector((state)=>state.booking.wheels)
+export default function WheelSelection({ onSelect, data }) {
+  const currentstep = useSelector((state) => state.booking.currentStep);
   const dispatch = useDispatch();
 
-  const handleSaveNext = () => {
-    dispatch(setVehicleType(selected))
-    dispatch(setStep(currentstep+1))
-  };
-
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = React.useState({});
 
   const handleChange = (event) => {
-    setSelected(event.target.value);
+    const selectedName = event.target.value;
+    const selectedObj = data.find(v => v.name === selectedName);
+    if (!selectedObj) return;
+
+    setSelected({
+      vehicle_type: selectedObj.name,
+      vehicle_type_id: selectedObj.id
+    });
+
     if (onSelect) {
-      onSelect(event.target.value);
+      onSelect({
+        vehicle_type: selectedObj.name,
+        vehicle_type_id: selectedObj.id
+      });
     }
   };
 
+  const handleSaveNext = () => {
+    if (!selected.vehicle_type_id) return;
+    dispatch(setVehicleType(selected));
+    dispatch(setStep(currentstep + 1));
+  };
+
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
-      flexDirection="column" 
-      gap={3}
-    >
+    <Box display="flex" alignItems="center" justifyContent="space-between" flexDirection="column" gap={3}>
       <FormControl>
         <FormLabel id="wheel-selection-label" sx={{ color: "black" }}>
-          Select Vehicle
+          Select Vehicle Type
         </FormLabel>
         <RadioGroup
           row
           aria-labelledby="wheel-selection-label"
           name="wheel-selection-group"
-          value={selected}
+          value={selected.vehicle_type || ""}
           onChange={handleChange}
         >
-          <FormControlLabel
-            value="2"
-            control={<Radio />}
-            label="2 Wheeler"
-            sx={{ color: "black" }}
-          />
-          <FormControlLabel
-            value="4"
-            control={<Radio />}
-            label="4 Wheeler"
-            sx={{ color: "black" }}
-          />
+          {data && data.length > 0 && data.map(val => (
+            <FormControlLabel
+              value={val.name}
+              key={val.id}
+              control={<Radio />}
+              label={val.name}
+              sx={{ color: "black" }}
+            />
+          ))}
         </RadioGroup>
       </FormControl>
 
       <Button
         variant="contained"
-        // disabled={!selected}
-        onClick={()=>{handleSaveNext()}}
+        disabled={!selected.vehicle_type_id}
+        onClick={handleSaveNext}
       >
         Next
       </Button>
     </Box>
   );
 }
+
