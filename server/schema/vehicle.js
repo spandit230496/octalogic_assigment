@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
-import {sequelize ,connectToDB} from "../conf/db_connection.js"; 
+import { sequelize } from "../conf/db_connection.js"; 
 import VehicleType from "./vehicleType.js";
 
 const Vehicle = sequelize.define("Vehicle", {
@@ -8,6 +8,10 @@ const Vehicle = sequelize.define("Vehicle", {
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
+  },
+  vehicle_type_id: {   // 👈 missing field added
+    type: DataTypes.UUID,
+    allowNull: false,
   },
   name: {
     type: DataTypes.STRING(255),
@@ -27,6 +31,7 @@ const Vehicle = sequelize.define("Vehicle", {
   timestamps: false,
 });
 
+// associations
 Vehicle.belongsTo(VehicleType, { foreignKey: "vehicle_type_id", onDelete: "CASCADE" });
 VehicleType.hasMany(Vehicle, { foreignKey: "vehicle_type_id" });
 

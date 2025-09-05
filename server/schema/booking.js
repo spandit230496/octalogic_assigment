@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
-import {sequelize ,connectToDB} from "../conf/db_connection.js"; 
+import { sequelize } from "../conf/db_connection.js"; 
 import User from "./user.js";
 import Vehicle from "./vehicle.js";
 
@@ -9,6 +9,14 @@ const Booking = sequelize.define("Booking", {
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
+  },
+  user_id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  vehicle_id: {
+    type: DataTypes.UUID,
+    allowNull: false,
   },
   start_date: {
     type: DataTypes.DATE,

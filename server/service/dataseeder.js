@@ -27,9 +27,9 @@ async function seed() {
       { name: "Verna", vehicle_type_id: carTypes[2].id },
       { name: "City", vehicle_type_id: carTypes[2].id },
       { name: "Royal Enfield", vehicle_type_id: bikeTypes[0].id },
-        { name: "Harley Davidson", vehicle_type_id: bikeTypes[0].id },
-        { name: "Kawasaki Ninja", vehicle_type_id: bikeTypes[1].id },
-        { name: "Yamaha R15", vehicle_type_id: bikeTypes[1].id },
+    { name: "Harley Davidson", vehicle_type_id: bikeTypes[0].id },
+    { name: "Kawasaki Ninja", vehicle_type_id: bikeTypes[1].id },
+    { name: "Yamaha R15", vehicle_type_id: bikeTypes[1].id },
     ]);
 
     await User.bulkCreate([
