@@ -2,10 +2,14 @@ import express from "express";
 import {getUsers,getAllUsers} from "../controller/userController.js";
 import {getVehicleModels,getVehicleTypes} from "../controller/vehicleController.js";
 import {Book,getBookings} from '../controller/bookingController.js'
+import swaggerUi  from 'swagger-ui-express';
+import swaggerDocument from './swagger.json'assert { type: "json" };
 
 
 const route = express.Router();
 
+route.use('/api-docs', swaggerUi.serve);
+route.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 route.get("/user", getUsers);
 route.get("/users",getAllUsers)

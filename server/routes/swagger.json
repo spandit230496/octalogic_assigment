@@ -1,0 +1,122 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vehicle Booking API",
+    "version": "1.0.0",
+    "description": "API documentation for Users, Vehicles, and Bookings"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Get user by firstname and lastname",
+        "parameters": [
+          {
+            "name": "firstname",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "lastname",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User fetched successfully"
+          },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "Users fetched successfully"
+          },
+          "404": { "description": "No users found" }
+        }
+      }
+    },
+    "/vehicle/vehicle-type": {
+      "get": {
+        "summary": "Get vehicle types by wheels",
+        "parameters": [
+          {
+            "name": "wheels",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vehicle types fetched successfully"
+          },
+          "404": { "description": "No vehicle types found" }
+        }
+      }
+    },
+    "/vehicle/model": {
+      "get": {
+        "summary": "Get vehicle models by type",
+        "parameters": [
+          {
+            "name": "vehicle_type_id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Vehicle models fetched successfully" },
+          "404": { "description": "No vehicle models found" }
+        }
+      }
+    },
+    "/booking/book": {
+      "post": {
+        "summary": "Book a vehicle",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": { "type": "string", "format": "uuid" },
+                  "vehicle_id": { "type": "string", "format": "uuid" },
+                  "start_date": { "type": "string", "format": "date-time" },
+                  "end_date": { "type": "string", "format": "date-time" }
+                },
+                "required": ["user_id", "vehicle_id", "start_date", "end_date"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Booking confirmed" },
+          "403": { "description": "Validation error" }
+        }
+      }
+    },
+    "/booking/all-booking": {
+      "get": {
+        "summary": "Get all bookings",
+        "responses": {
+          "200": { "description": "Bookings fetched successfully" }
+        }
+      }
+    }
+  }
+}

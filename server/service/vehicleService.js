@@ -42,7 +42,7 @@ const getVehicleModel = async (req,res)=>{
         include: [
             {
             model: VehicleType,
-            attributes: ["id", "name", "type", "wheels"], // pick only what you need
+            attributes: ["id", "name", "type", "wheels"],
             },
         ],
         raw:true
