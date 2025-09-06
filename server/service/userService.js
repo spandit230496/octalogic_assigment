@@ -2,10 +2,10 @@ import User from "../schema/user.js";
 
 export const getUser = async (req, res) => {
   try {
-    const { firstname, lastname } = req.query;
+    const { first_name, last_name } = req.query;
 
     const user = await User.findOne({
-      where: { firstname, lastname },
+      where: { first_name, last_name },
       attributes:["first_name","last_name"]
     });
 

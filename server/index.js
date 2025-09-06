@@ -7,9 +7,13 @@ import VehicleType from "./schema/vehicleType.js"
 import { sequelize,connectToDB } from "./conf/db_connection.js"
 import route from "./routes/route.js"
 import { json } from "sequelize"
+import cors from 'cors'
 
 const app = express()
+
+
 app.use(express.json())
+app.use(cors())
 app.use('/api',route)
 dotenv.config();
 
