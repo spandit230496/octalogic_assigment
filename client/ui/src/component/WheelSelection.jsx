@@ -38,7 +38,7 @@ export default function WheelSelection({ onSelect }) {
     >
       <FormControl>
         <FormLabel id="wheel-selection-label" sx={{ color: "black" }}>
-          Select Vehicle
+          Select Number of Wheels 
         </FormLabel>
         <RadioGroup
           row
@@ -64,7 +64,7 @@ export default function WheelSelection({ onSelect }) {
 
       <Button
         variant="contained"
-        // disabled={!selected}
+        disabled={!selected}
         onClick={()=>{handleSaveNext()}}
       >
         Next

@@ -13,6 +13,9 @@ import TypeOfVehicle from "../component/TypesOfVehicle";
 import ModelSelection from "../component/ModelSelection";
 import DateSelection from "../component/DatePicker";
 import Book from "../component/Booking";
+import Congratulations from "../component/Congratulation";
+import { ToastContainer, toast } from 'material-react-toastify';
+import 'material-react-toastify/dist/ReactToastify.css';
 
 const steps = [
   "Fill Name",
@@ -66,6 +69,8 @@ export default function Steps() {
     fetchModel(currentType?.vehicle_type_id);
   }, [currentType]);
 
+
+
   const StepContent = () => {
     switch (stepCount) {
       case 0:
@@ -80,6 +85,8 @@ export default function Steps() {
         return <DateSelection />;
       case 5:
         return <Book />;
+      case 6:
+        return <Congratulations/>;
       default:
         return <div>✅ Done!</div>;
     }

@@ -25,12 +25,12 @@ export default function DateSelection() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>
         <DatePicker
-          label="Select Date"
+          label="Select Start Date"
           value={selectStartDate}
           onChange={(newValue) => setSelectStartDate(newValue)}
         />
         <DatePicker
-          label="Select Date"
+          label="Select End Date"
           value={selectEndDate}
           onChange={(newValue) => setSelectEndDate(newValue)}
         />

@@ -4,9 +4,9 @@ import Vehicle from "../schema/vehicle.js";
 
 export const doBooking = async (req, res) => {
   try {
-    const { user_id, vehicle_id, start_date, end_date } = req.body;
+    const { first_name,last_name, vehicle_id, start_date, end_date } = req.body;
 
-    const user = await User.findOne({ where: { id: user_id } });
+    const user = await User.findOne({ where: { first_name,last_name } });
     if (!user) {
       return res.status(403).json({
         success: false,
@@ -33,10 +33,10 @@ export const doBooking = async (req, res) => {
     }
 
     const booking = await Booking.create({
-      user_id,
-      vehicle_id,
-      start_date,
-      end_date,
+      "user_id":user.id,
+      "vehicle_id":vehicle_id,
+      "start_date":start_date,
+      "end_date":end_date,
     });
 
     return res.status(200).json({
